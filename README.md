@@ -22,9 +22,8 @@ Una vez tengas los usuarios dados de alta, con que usen el comando una vez ya es
      "icon": ":rafita:"
  }
  ```
-
 Imagenes:
 
-![alt text](https://github.com/ganchix/potaciones-slack-command/tree/master/src/main/resources/potaciones.png "Potaciones")
+![alt text][logo]
 
-
+[logo]: https://github.com/ganchix/potaciones-slack-command/tree/master/src/main/resources/potaciones.png "Uso de potaciones"
