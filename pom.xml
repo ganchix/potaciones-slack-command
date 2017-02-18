@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>es.org.ganchix</groupId>
-    <artifactId>slackcommandlaunch</artifactId>
+    <artifactId>slackcommandpotaciones</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
