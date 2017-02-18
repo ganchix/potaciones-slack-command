@@ -26,4 +26,4 @@ Imagenes:
 
 ![alt text][logo]
 
-[logo]: https://github.com/ganchix/potaciones-slack-command/tree/master/src/main/resources/potaciones.png "Uso de potaciones"
+[logo]: https://github.com/ganchix/potaciones-slack-command/raw/master/src/main/resources/potaciones.png "Uso de potaciones"
