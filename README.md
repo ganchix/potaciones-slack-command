@@ -1,6 +1,6 @@
 # potaciones-slack-command
 
-[![Build Status](https://travis-ci.org/ganchix/potaciones-slack-command.png?branch=master)](https://travis-ci.org/ganchix/potaciones-slack-command)
+[![Build Status](https://travis-ci.org/ganchix/potaciones-slack-command.svg?branch=master)](https://travis-ci.org/ganchix/potaciones-slack-command)
 
 Extensión de slack que usamos en [Fintonic](https://www.fintonic.com), para votar donde queremos ir a comer los jueves.
 
