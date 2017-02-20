@@ -1,5 +1,7 @@
 # potaciones-slack-command
 
+[![Build Status](https://travis-ci.org/ganchix/potaciones-slack-command.png?branch=master)](https://travis-ci.org/ganchix/potaciones-slack-command)
+
 Extensión de slack que usamos en [Fintonic](https://www.fintonic.com), para votar donde queremos ir a comer los jueves.
 
 Usarla es fácil, solo tienes que desplegar sobre Heroku el software, usar un servicio de MongoDB tipo mlab.com y configurar el comando en slack.
