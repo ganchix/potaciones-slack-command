@@ -76,10 +76,13 @@ public class PotacionesServiceImpl implements PotacionesService {
                 List<Restaurant> findAll = restaurantRepository.findAll();
                 slackResponse.setAttachments(findAll
                         .parallelStream()
-                        .map(rest -> {
-                            String attachement = StringUtils.capitalize(rest.getName()) + " (" + rest.getPersonsToGo().size() + ")" + " : "
-                                    + rest.getPersonsToGo().parallelStream().map(prsn ->
-                                    (!StringUtils.isEmpty(prsn.getIcon()) ? prsn.getIcon() : prsn.getName())).collect(Collectors.joining(", "));
+                        .map(restaurant -> {
+                            String attachement = StringUtils.capitalize(restaurant.getName()) + " (" + restaurant.getPersonsToGo().size() + ")" + " : "
+                                    + restaurant.getPersonsToGo()
+                                    .parallelStream()
+                                    .map(personOfRestaurant ->
+                                            (!StringUtils.isEmpty(personOfRestaurant.getIcon()) ? personOfRestaurant.getIcon() : personOfRestaurant.getName()))
+                                    .collect(Collectors.joining(", "));
                             return new SlackAttachments(attachement);
 
                         }).collect(Collectors.toList()));
@@ -93,6 +96,7 @@ public class PotacionesServiceImpl implements PotacionesService {
 
         } else {
             log.error("Slack request is not correct {}", slackRequest);
+            throw new RuntimeException("Token is not correct");
         }
         return slackResponse;
     }
