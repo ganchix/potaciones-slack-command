@@ -1,0 +1,10 @@
+{
+  "name": "Potaciones command",
+  "description": "App to support potaciones command",
+  "repository": "https://github.com/ganchix/potaciones-slack-command",
+  "keywords": [
+    "java",
+    "spring",
+    "slack"
+  ]
+}
