@@ -2,6 +2,7 @@ package es.org.ganchix.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import es.org.ganchix.SlackCommandLaunchApplication;
+import es.org.ganchix.dto.response.SlackResponse;
 import es.org.ganchix.repository.PersonRepository;
 import es.org.ganchix.repository.RestaurantRepository;
 import org.junit.Before;
@@ -14,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -60,6 +62,41 @@ public class SlackControllerTests {
                 .andExpect(jsonPath("text", is(notNullValue())))
                 .andExpect(jsonPath("attachments", is(notNullValue())))
                 .andReturn();
+    }
+
+    @Test
+    public void testDoTwoPotacionesInSameRestaurant_ShouldReturnUniqueRestaurantWithTwoPotaciones() throws Exception {
+
+        MvcResult onePotacion = mockMvc.perform(post("/slack/command/potaciones")
+                .contentType("application/x-www-form-urlencoded;charset=UTF-8")
+                .param("token", "slack_id")
+                .param("user_id", "user_id")
+                .param("user_name", "user_name")
+                .param("text", "rest1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("response_type", is(notNullValue())))
+                .andExpect(jsonPath("text", is(notNullValue())))
+                .andExpect(jsonPath("attachments", is(notNullValue())))
+                .andReturn();
+
+        MvcResult twoPotacion = mockMvc.perform(post("/slack/command/potaciones")
+                .contentType("application/x-www-form-urlencoded;charset=UTF-8")
+                .param("token", "slack_id")
+                .param("user_id", "user_id2")
+                .param("user_name", "user_name2")
+                .param("text", "rest1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("response_type", is(notNullValue())))
+                .andExpect(jsonPath("text", is(notNullValue())))
+                .andExpect(jsonPath("attachments", is(notNullValue())))
+                .andReturn();
+
+        SlackResponse slackResponse = jacksonObjectMapper.readValue(twoPotacion.getResponse().getContentAsString(), SlackResponse.class);
+        assertThat(slackResponse.getText(), is("user_name2 ha seleccionado Rest1 asi van las potaciones: "));
+        assertThat(slackResponse.getAttachments().size(), is(1));
+        assertThat(slackResponse.getAttachments().get(0).getText(), is("Rest1 (2) : user_name, user_name2"));
+
+
     }
 
 }
